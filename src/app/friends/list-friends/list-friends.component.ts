@@ -1,21 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendsService } from '../../core/services/friends/friends.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-friends',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './list-friends.component.html',
 })
 export class ListFriendsComponent implements OnInit {
   data: any;
+  formData: any = {};
 
   constructor(private friendService: FriendsService) {}
 
   ngOnInit() {
-    const url = '/api/friend';
-    this.friendService.getData(url).subscribe((response) => {
+    this.showFriends();
+  }
+
+  showFriends() {
+    this.friendService.getData().subscribe((response) => {
       this.data = response;
+    });
+  }
+
+  submitData() {
+    this.friendService.postData(this.formData).subscribe((response) => {
+      console.log(response);
+      this.showFriends();
     });
   }
 }

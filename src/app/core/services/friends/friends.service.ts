@@ -16,4 +16,8 @@ export class FriendsService {
   postData(data: any) {
     return this.http.post(this.url, data);
   }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

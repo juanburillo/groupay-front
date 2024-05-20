@@ -24,10 +24,19 @@ export class ListFriendsComponent implements OnInit {
     });
   }
 
-  submitData() {
-    this.friendService.postData(this.formData).subscribe((response) => {
-      console.log(response);
-      this.showFriends();
+  submitData(event: Event) {
+    event.preventDefault();
+    this.friendService.postData(this.formData).subscribe(() => {
+      this.formData = {}; // Clear form data
+      this.showFriends(); // Refresh the list
+    });
+  }
+
+  editFriend() {}
+
+  deleteFriend(id: number) {
+    this.friendService.delete(id).subscribe(() => {
+      this.showFriends(); // Refresh the list
     });
   }
 }

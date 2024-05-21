@@ -5,9 +5,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FriendsService {
+  private url = '/api/friend';
+
   constructor(private http: HttpClient) {}
 
-  getData(url: string) {
-    return this.http.get(url);
+  getFriends() {
+    return this.http.get(this.url);
+  }
+
+  createFriend(data: any) {
+    return this.http.post(this.url, data);
+  }
+
+  updateFriend(id: number, newFriendName: string) {
+    return this.http.put(`${this.url}/${id}?name=${newFriendName}`, {});
+  }
+
+  deleteFriend(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

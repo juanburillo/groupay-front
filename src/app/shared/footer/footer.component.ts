@@ -14,8 +14,8 @@ export class FooterComponent {
     this.router.navigate(['/']);
   }
 
-  navigateToBalances() {
-    this.router.navigate(['/']);
+  navigateToExpenses() {
+    this.router.navigate(['/expenses']);
   }
 
   navigateToFriends() {

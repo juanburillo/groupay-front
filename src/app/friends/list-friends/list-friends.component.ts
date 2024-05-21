@@ -3,6 +3,7 @@ import { FriendsService } from '../../core/services/friends/friends.service';
 import { FormsModule } from '@angular/forms';
 import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+import { BalancesService } from '../../core/services/balances/balances.service';
 
 @Component({
   selector: 'app-list-friends',
@@ -11,7 +12,9 @@ import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.
   templateUrl: './list-friends.component.html',
 })
 export class ListFriendsComponent implements OnInit {
-  data: any;
+  friendData: any;
+  balanceData: any;
+
   formData: any = {};
 
   showEditDialog: boolean = false;
@@ -20,7 +23,7 @@ export class ListFriendsComponent implements OnInit {
   friendToEdit: any;
   friendToDelete: any;
 
-  constructor(private friendService: FriendsService) {}
+  constructor(private friendService: FriendsService, private balanceService: BalancesService) {}
 
   ngOnInit() {
     this.showFriends();
@@ -28,7 +31,14 @@ export class ListFriendsComponent implements OnInit {
 
   showFriends() {
     this.friendService.getFriends().subscribe((response) => {
-      this.data = response;
+      this.friendData = response;
+    });
+    this.showBalances();
+  }
+
+  showBalances() {
+    this.balanceService.getBalances().subscribe((response) => {
+      this.balanceData = response;
     });
   }
 

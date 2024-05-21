@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -7,6 +7,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './delete-dialog.component.html',
 })
 export class DeleteDialogComponent {
+  @Input() title: string = '';
+  @Input() description: string = '';
   @Output() cancelDelete: EventEmitter<any> = new EventEmitter();
   @Output() acceptDelete: EventEmitter<any> = new EventEmitter();
 

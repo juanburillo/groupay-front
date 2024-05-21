@@ -38,7 +38,7 @@
           />
         </svg>
       </button>
-      <button>
+      <button (click)="toggleDeleteDialog(expense)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -60,4 +60,8 @@
 </ul>
 } @else {
 <p class="text-center mt-8">Your group has no expenses!</p>
+}
+
+@if (this.showDeleteDialog) {
+  <app-delete-dialog (cancelDelete)="toggleDeleteDialog(null)" (acceptDelete)="deleteExpense()" [title]="'Delete expense'" [description]="'Are you sure you want to delete this expense? This action cannot be undone.'"></app-delete-dialog>
 }

@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpensesService } from '../../core/services/expenses/expenses.service';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-list-expenses',
   standalone: true,
-  imports: [],
+  imports: [DeleteDialogComponent],
   templateUrl: './list-expenses.component.html',
 })
 export class ListExpensesComponent implements OnInit {
   data: any;
+
+  showDeleteDialog: boolean = false;
+
+  expenseToDelete: any;
 
   constructor(private expenseService: ExpensesService) {}
 
@@ -19,6 +24,18 @@ export class ListExpensesComponent implements OnInit {
   showExpenses() {
     this.expenseService.getExpenses().subscribe((response) => {
       this.data = response;
+    });
+  }
+
+  toggleDeleteDialog(expense: any) {
+    this.expenseToDelete = expense;
+    this.showDeleteDialog = !this.showDeleteDialog;
+  }
+
+  deleteExpense() {
+    this.expenseService.deleteExpense(this.expenseToDelete.id).subscribe(() => {
+      this.toggleDeleteDialog(null);
+      this.showExpenses(); // Refresh the list
     });
   }
 

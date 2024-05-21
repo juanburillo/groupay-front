@@ -12,4 +12,8 @@ export class ExpensesService {
   getExpenses() {
     return this.http.get(this.url);
   }
+
+  deleteExpense(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

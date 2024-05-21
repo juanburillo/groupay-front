@@ -9,15 +9,19 @@ export class FriendsService {
 
   constructor(private http: HttpClient) {}
 
-  getData() {
+  getFriends() {
     return this.http.get(this.url);
   }
 
-  postData(data: any) {
+  createFriend(data: any) {
     return this.http.post(this.url, data);
   }
 
-  delete(id: number) {
+  updateFriend(id: number, newFriendName: string) {
+    return this.http.put(`${this.url}/${id}?name=${newFriendName}`, {});
+  }
+
+  deleteFriend(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 }

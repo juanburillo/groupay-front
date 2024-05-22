@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExpensesService } from '../../core/services/expenses/expenses.service';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { CreateDialogComponent } from '../../shared/create-dialog/create-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-expenses',
@@ -17,7 +18,7 @@ export class ListExpensesComponent implements OnInit {
 
   expenseToDelete: any;
 
-  constructor(private expenseService: ExpensesService) {}
+  constructor(private expenseService: ExpensesService, private router: Router) {}
 
   ngOnInit() {
     this.showExpenses();
@@ -78,5 +79,9 @@ export class ListExpensesComponent implements OnInit {
     } else {
       return seconds === 1 ? '1 second ago' : `${seconds} seconds ago`;
     }
+  }
+
+  navigateToTransactions() {
+    this.router.navigate(['/transactions']);
   }
 }

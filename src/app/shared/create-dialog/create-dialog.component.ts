@@ -44,17 +44,21 @@ export class CreateDialogComponent implements OnInit {
 
   validateFormData() {
     this.showErrorText = false;
-    if (this.amount === undefined || this.amount === null || this.amount <= 0) {
+    if (!this.amount || this.amount <= 0) {
       this.showErrorText = true;
       return false;
-    } else if (this.description === undefined || this.description === null || this.description === '') {
-      this.showErrorText = true;
-      return false;
-    } else if (this.friendId === undefined || this.friendId === 0) {
-      this.showErrorText = true;
-      return false;
-    } else {
-      return true;
     }
+
+    if (!this.description || this.description.trim() === '') {
+      this.showErrorText = true;
+      return false;
+    }
+
+    if (!this.friendId || this.friendId === 0) {
+      this.showErrorText = true;
+      return false;
+    }
+
+    return true;
   }
 }

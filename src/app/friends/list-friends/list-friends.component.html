@@ -11,7 +11,7 @@
 <div>
   <form class="w-1/4 m-auto mt-10" (submit)="createFriend($event)">
     <input
-      [(ngModel)]="formData.name"
+      [(ngModel)]="name"
       name="name"
       class="appearance-none block w-full text-gray-700 border-2 border-rose-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
       type="text"
@@ -26,6 +26,9 @@
       </button>
     </div>
   </form>
+  @if (this.showErrorText) {
+    <p class="text-rose-500 text-center mt-5">Please ensure the field is filled out correctly.</p>
+  }
 </div>
 
 @if (friendData != 0) {

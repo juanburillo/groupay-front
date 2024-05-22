@@ -15,15 +15,19 @@ export class ListFriendsComponent implements OnInit {
   friendData: any;
   balanceData: any;
 
-  formData: any = {};
+  name?: string;
 
   showEditDialog: boolean = false;
   showDeleteDialog: boolean = false;
+  showErrorText: boolean = false;
 
   friendToEdit: any;
   friendToDelete: any;
 
-  constructor(private friendService: FriendsService, private balanceService: BalancesService) {}
+  constructor(
+    private friendService: FriendsService,
+    private balanceService: BalancesService
+  ) {}
 
   ngOnInit() {
     this.showFriends();
@@ -44,10 +48,12 @@ export class ListFriendsComponent implements OnInit {
 
   createFriend(event: Event) {
     event.preventDefault();
-    this.friendService.createFriend(this.formData).subscribe(() => {
-      this.formData = {}; // Clear form data
-      this.showFriends(); // Refresh the list
-    });
+    if (this.validateFormData()) {
+      this.friendService.createFriend({ name: this.name }).subscribe(() => {
+        this.name = ''; // Clear form data
+        this.showFriends(); // Refresh the list
+      });
+    }
   }
 
   toggleEditDialog(friend: any) {
@@ -56,10 +62,12 @@ export class ListFriendsComponent implements OnInit {
   }
 
   editFriend(newFriendName: string) {
-    this.friendService.updateFriend(this.friendToEdit.id, newFriendName).subscribe(() => {
-      this.toggleEditDialog(null);
-      this.showFriends();
-    });
+    this.friendService
+      .updateFriend(this.friendToEdit.id, newFriendName)
+      .subscribe(() => {
+        this.toggleEditDialog(null);
+        this.showFriends();
+      });
   }
 
   toggleDeleteDialog(friend: any) {
@@ -72,5 +80,14 @@ export class ListFriendsComponent implements OnInit {
       this.toggleDeleteDialog(null);
       this.showFriends(); // Refresh the list
     });
+  }
+
+  validateFormData() {
+    this.showErrorText = false;
+    if (!this.name || this.name.trim() === '') {
+      this.showErrorText = true;
+      return false;
+    }
+    return true;
   }
 }

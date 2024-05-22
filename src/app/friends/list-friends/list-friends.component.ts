@@ -42,7 +42,7 @@ export class ListFriendsComponent implements OnInit {
     });
   }
 
-  submitData(event: Event) {
+  createFriend(event: Event) {
     event.preventDefault();
     this.friendService.createFriend(this.formData).subscribe(() => {
       this.formData = {}; // Clear form data

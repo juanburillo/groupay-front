@@ -8,13 +8,19 @@
   >
 </h1>
 
-<div>
-  <form class="w-1/4 m-auto mt-10"></form>
+<div class="flex justify-center mt-10">
+  <button
+  (click)="toggleCreateDialog()"
+  type="submit"
+  class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded text-center"
+  >
+  Create expense
+  </button>
 </div>
 
-@if (data != 0) {
+@if (expenseData != 0) {
 <ul role="list" class="divide-y divide-gray-100 mx-10 mt-8">
-  @for (expense of data; track expense.id) {
+  @for (expense of expenseData; track expense.id) {
   <li class="flex justify-between gap-x-6 py-5">
     <div class="flex min-w-0 gap-x-8 items-center m-auto">
       <ul class="text-sm leading-6 text-gray-900">
@@ -60,6 +66,10 @@
 </ul>
 } @else {
 <p class="text-center mt-8">Your group has no expenses!</p>
+}
+
+@if (this.showCreateDialog) {
+  <app-create-dialog (cancelCreate)="toggleCreateDialog()" (acceptCreate)="createExpense($event)"></app-create-dialog>
 }
 
 @if (this.showDeleteDialog) {

@@ -1,27 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Friend } from '../../../friends/friend';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendsService {
-  private url = '/api/friend';
+  private url = 'friend';
 
   constructor(private http: HttpClient) {}
 
-  getFriends() {
-    return this.http.get(this.url);
+  getFriends(): Observable<Friend[]> {
+    return this.http.get<Friend[]>(this.url);
   }
 
-  createFriend(data: any) {
-    return this.http.post(this.url, data);
+  createFriend(friend: Omit<Friend, 'id'>): Observable<void> {
+    return this.http.post<void>(this.url, friend);
   }
 
-  updateFriend(id: number, newFriendName: string) {
-    return this.http.put(`${this.url}/${id}?name=${newFriendName}`, {});
+  updateFriend({ id, name }: Friend): Observable<void> {
+    return this.http.put<void>(`${this.url}/${id}?name=${name}`, {});
   }
 
-  deleteFriend(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+  deleteFriend({ id }: Friend): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

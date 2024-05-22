@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Balance } from '../../../friends/balance';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BalancesService {
-  private url = '/api/balance'
+  private url = 'balance';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getBalances() {
-    return this.http.get(this.url);
+  getBalances(): Observable<Balance[]> {
+    return this.http.get<Balance[]>(this.url);
   }
 }

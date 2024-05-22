@@ -69,11 +69,11 @@
       @for (balance of balanceData; track balance.id) {
         @if (balance.friend.id === friend.id) {
           @if (balance.amount > 0) {
-            <span class="font-bold text-green-500">+{{ balance.amount }}</span>
+            <span class="font-bold text-green-500">+{{ balance.amount }}€</span>
           } @if (balance.amount == 0) {
-            <span class="font-bold text-indigo-500">{{ balance.amount }}</span>
+            <span class="font-bold text-indigo-500">{{ balance.amount }}€</span>
           } @if (balance.amount < 0) {
-            <span class="font-bold text-red-500">{{ balance.amount }}</span>
+            <span class="font-bold text-red-500">{{ balance.amount }}€</span>
           }
         }
       }

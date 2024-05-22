@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { BalancesService } from '../../core/services/balances/balances.service';
+import { Friend } from '../friend';
+import { Balance } from '../balance';
 
 @Component({
   selector: 'app-list-friends',
@@ -12,8 +14,8 @@ import { BalancesService } from '../../core/services/balances/balances.service';
   templateUrl: './list-friends.component.html',
 })
 export class ListFriendsComponent implements OnInit {
-  friendData: any;
-  balanceData: any;
+  friendData?: Friend[];
+  balanceData?: Balance[];
 
   name?: string;
 
@@ -21,68 +23,68 @@ export class ListFriendsComponent implements OnInit {
   showDeleteDialog: boolean = false;
   showErrorText: boolean = false;
 
-  friendToEdit: any;
-  friendToDelete: any;
+  friendToEdit?: Friend;
+  friendToDelete?: Friend;
 
   constructor(
-    private friendService: FriendsService,
-    private balanceService: BalancesService
+    private friendsService: FriendsService,
+    private balancesService: BalancesService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.showFriends();
   }
 
-  showFriends() {
-    this.friendService.getFriends().subscribe((response) => {
+  showFriends(): void {
+    this.friendsService.getFriends().subscribe((response) => {
       this.friendData = response;
     });
     this.showBalances();
   }
 
-  showBalances() {
-    this.balanceService.getBalances().subscribe((response) => {
+  showBalances(): void {
+    this.balancesService.getBalances().subscribe((response) => {
       this.balanceData = response;
     });
   }
 
-  createFriend(event: Event) {
+  createFriend(event: Event): void {
     event.preventDefault();
     if (this.validateFormData()) {
-      this.friendService.createFriend({ name: this.name }).subscribe(() => {
-        this.name = ''; // Clear form data
-        this.showFriends(); // Refresh the list
+      this.friendsService.createFriend({ name: this.name! }).subscribe(() => {
+        this.name = ''; 
+        this.showFriends();
       });
     }
   }
 
-  toggleEditDialog(friend: any) {
+  toggleEditDialog(friend: Friend): void {
     this.friendToEdit = friend;
     this.showEditDialog = !this.showEditDialog;
   }
 
-  editFriend(newFriendName: string) {
-    this.friendService
-      .updateFriend(this.friendToEdit.id, newFriendName)
+  editFriend(name: string): void {
+    this.friendsService
+      .updateFriend({ id: this.friendToEdit!.id, name })
       .subscribe(() => {
-        this.toggleEditDialog(null);
+        this.toggleEditDialog({});
         this.showFriends();
       });
   }
 
-  toggleDeleteDialog(friend: any) {
+  toggleDeleteDialog(friend: Friend): void {
     this.friendToDelete = friend;
     this.showDeleteDialog = !this.showDeleteDialog;
   }
 
-  deleteFriend() {
-    this.friendService.deleteFriend(this.friendToDelete.id).subscribe(() => {
-      this.toggleDeleteDialog(null);
-      this.showFriends(); // Refresh the list
+  deleteFriend(): void {
+    this.friendsService.deleteFriend(this.friendToDelete!).subscribe(() => {
+      this.toggleDeleteDialog({});
+      this.showFriends();
     });
   }
 
-  validateFormData() {
+  validateFormData(): boolean {
     this.showErrorText = false;
     if (!this.name || this.name.trim() === '') {
       this.showErrorText = true;

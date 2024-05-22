@@ -12,11 +12,11 @@ export class DeleteDialogComponent {
   @Output() cancelDelete: EventEmitter<any> = new EventEmitter();
   @Output() acceptDelete: EventEmitter<any> = new EventEmitter();
 
-  cancel() {
+  cancel(): void {
     this.cancelDelete.emit();
   }
 
-  accept() {
+  accept(): void {
     this.acceptDelete.emit();
   }
 }

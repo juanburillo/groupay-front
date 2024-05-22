@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FriendsService } from '../../core/services/friends/friends.service';
 import { FormsModule } from '@angular/forms';
+import { Friend } from '../../friends/friend';
 
 @Component({
   selector: 'app-create-dialog',
@@ -12,7 +13,7 @@ export class CreateDialogComponent implements OnInit {
   @Output() cancelCreate: EventEmitter<any> = new EventEmitter();
   @Output() acceptCreate: EventEmitter<any> = new EventEmitter();
 
-  friendData: any;
+  friendData?: Friend[];
 
   amount?: number;
   description?: string;
@@ -22,17 +23,17 @@ export class CreateDialogComponent implements OnInit {
 
   constructor(private friendService: FriendsService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.friendService.getFriends().subscribe((response) => {
       this.friendData = response;
     });
   }
 
-  cancel() {
+  cancel(): void {
     this.cancelCreate.emit();
   }
 
-  accept() {
+  accept(): void {
     if (this.validateFormData()) {
       this.acceptCreate.emit({
         amount: this.amount,
@@ -42,7 +43,7 @@ export class CreateDialogComponent implements OnInit {
     }
   }
 
-  validateFormData() {
+  validateFormData(): boolean {
     this.showErrorText = false;
     if (!this.amount || this.amount <= 0) {
       this.showErrorText = true;

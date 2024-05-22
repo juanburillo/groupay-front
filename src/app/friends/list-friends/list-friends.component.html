@@ -31,7 +31,7 @@
   }
 </div>
 
-@if (friendData != 0) {
+@if (friendData!.length > 0) {
 <ul role="list" class="divide-y divide-gray-100 mx-10 mt-8">
   @for (friend of friendData; track friend.id) {
   <li class="flex flex-col gap-x-6 py-5">
@@ -66,7 +66,7 @@
     </div>
     <p class="text-center text-sm leading-6 text-gray-900">
       Balance:
-      @for (balance of balanceData; track balance.id) {
+      @for (balance of balanceData; track balance.friend.id) {
         @if (balance.friend.id === friend.id) {
           @if (balance.amount > 0) {
             <span class="font-bold text-green-500">+{{ balance.amount }}€</span>
@@ -86,9 +86,9 @@
 }
 
 @if (this.showEditDialog) {
-  <app-edit-dialog [initialName]="friendToEdit?.name" (cancelEdit)="toggleEditDialog(null)" (acceptEdit)="editFriend($event)"></app-edit-dialog>
+  <app-edit-dialog [initialName]="friendToEdit!.name!" (cancelEdit)="toggleEditDialog({})" (acceptEdit)="editFriend($event)"></app-edit-dialog>
 }
 
 @if (this.showDeleteDialog) {
-  <app-delete-dialog (cancelDelete)="toggleDeleteDialog(null)" (acceptDelete)="deleteFriend()" [title]="'Delete friend'" [description]="'Are you sure you want to delete this friend? All of their data will be permanently removed. This action cannot be undone.'"></app-delete-dialog>
+  <app-delete-dialog (cancelDelete)="toggleDeleteDialog({})" (acceptDelete)="deleteFriend()" [title]="'Delete friend'" [description]="'Are you sure you want to delete this friend? All of their data will be permanently removed. This action cannot be undone.'"></app-delete-dialog>
 }

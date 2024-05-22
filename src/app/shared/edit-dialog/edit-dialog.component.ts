@@ -14,15 +14,15 @@ export class EditDialogComponent implements OnInit {
 
   newFriendName: string = '';
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.newFriendName = this.initialName;
   }
 
-  cancel() {
+  cancel(): void {
     this.cancelEdit.emit();
   }
 
-  accept() {
+  accept(): void {
     this.acceptEdit.emit(this.newFriendName);
   }
 }

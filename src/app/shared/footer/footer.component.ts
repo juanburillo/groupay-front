@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
 export class FooterComponent {
   constructor(private router: Router) {}
 
-  navigateToHome() {
+  navigateToHome(): void {
     this.router.navigate(['/']);
   }
 
-  navigateToExpenses() {
+  navigateToExpenses(): void {
     this.router.navigate(['/expenses']);
   }
 
-  navigateToFriends() {
+  navigateToFriends(): void {
     this.router.navigate(['/friends']);
   }
 }

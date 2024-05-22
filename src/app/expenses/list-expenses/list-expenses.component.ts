@@ -3,6 +3,7 @@ import { ExpensesService } from '../../core/services/expenses/expenses.service';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { CreateDialogComponent } from '../../shared/create-dialog/create-dialog.component';
 import { Router } from '@angular/router';
+import { Expense } from '../expense';
 
 @Component({
   selector: 'app-list-expenses',
@@ -11,50 +12,52 @@ import { Router } from '@angular/router';
   templateUrl: './list-expenses.component.html',
 })
 export class ListExpensesComponent implements OnInit {
-  expenseData: any;
+  expenseData?: Expense[];
 
   showCreateDialog: boolean = false;
   showDeleteDialog: boolean = false;
 
-  expenseToDelete: any;
+  expenseToDelete?: Expense;
 
-  constructor(private expenseService: ExpensesService, private router: Router) {}
+  constructor(
+    private expenseService: ExpensesService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.showExpenses();
   }
 
-  showExpenses() {
+  showExpenses(): void {
     this.expenseService.getExpenses().subscribe((response) => {
       this.expenseData = response;
     });
   }
 
-  createExpense(friend: any) {
-    console.log(friend);
-    this.expenseService.createExpense(friend).subscribe(() => {
+  createExpense(expense: Expense): void {
+    this.expenseService.createExpense(expense).subscribe(() => {
       this.toggleCreateDialog();
       this.showExpenses();
     });
   }
 
-  toggleCreateDialog() {
+  toggleCreateDialog(): void {
     this.showCreateDialog = !this.showCreateDialog;
   }
 
-  toggleDeleteDialog(expense: any) {
+  toggleDeleteDialog(expense: Expense): void {
     this.expenseToDelete = expense;
     this.showDeleteDialog = !this.showDeleteDialog;
   }
 
-  deleteExpense() {
-    this.expenseService.deleteExpense(this.expenseToDelete.id).subscribe(() => {
-      this.toggleDeleteDialog(null);
-      this.showExpenses(); // Refresh the list
+  deleteExpense(): void {
+    this.expenseService.deleteExpense(this.expenseToDelete!).subscribe(() => {
+      this.toggleDeleteDialog({});
+      this.showExpenses();
     });
   }
 
-  timeAgo(dateString: string) {
+  timeAgo(dateString: string): string {
     const inputDate: any = new Date(dateString);
     const now: any = new Date();
     const diff = now - inputDate; // Difference in milliseconds
@@ -81,7 +84,7 @@ export class ListExpensesComponent implements OnInit {
     }
   }
 
-  navigateToTransactions() {
+  navigateToTransactions(): void {
     this.router.navigate(['/transactions']);
   }
 }

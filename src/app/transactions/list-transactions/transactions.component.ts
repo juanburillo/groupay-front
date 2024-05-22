@@ -11,15 +11,18 @@ import { TransactionsService } from '../../core/services/transactions/transactio
 export class ListTransactionsComponent implements OnInit {
   transactionData: any;
 
-  constructor(private transactionService: TransactionsService, private router: Router) {}
+  constructor(
+    private transactionsService: TransactionsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.transactionService.getTransactions().subscribe((response) => {
+    this.transactionsService.getTransactions().subscribe((response) => {
       this.transactionData = response;
     });
   }
 
-  navigateToExpenses() {
+  navigateToExpenses(): void {
     this.router.navigate(['/expenses']);
   }
 }

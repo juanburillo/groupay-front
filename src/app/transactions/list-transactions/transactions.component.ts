@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TransactionsService } from '../core/services/transactions/transactions.service';
+import { TransactionsService } from '../../core/services/transactions/transactions.service';
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
   imports: [],
-  templateUrl: './transactions.component.html',
+  templateUrl: './list-transactions.component.html',
 })
-export class TransactionsComponent implements OnInit {
+export class ListTransactionsComponent implements OnInit {
   transactionData: any;
 
   constructor(private transactionService: TransactionsService, private router: Router) {}

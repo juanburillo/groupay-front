@@ -14,17 +14,17 @@ import { Balance } from '../balance';
   templateUrl: './list-friends.component.html',
 })
 export class ListFriendsComponent implements OnInit {
-  friendData?: Friend[];
-  balanceData?: Balance[];
+  friendData: Friend[] = [];
+  balanceData: Balance[] = [];
 
-  name?: string;
+  name: string = '';
 
   showEditDialog: boolean = false;
   showDeleteDialog: boolean = false;
   showErrorText: boolean = false;
 
-  friendToEdit?: Friend;
-  friendToDelete?: Friend;
+  friendToEdit: Friend = {};
+  friendToDelete: Friend = {};
 
   constructor(
     private friendsService: FriendsService,
@@ -51,7 +51,7 @@ export class ListFriendsComponent implements OnInit {
   createFriend(event: Event): void {
     event.preventDefault();
     if (this.validateFormData()) {
-      this.friendsService.createFriend({ name: this.name! }).subscribe(() => {
+      this.friendsService.createFriend({ name: this.name }).subscribe(() => {
         this.name = ''; 
         this.showFriends();
       });
@@ -65,7 +65,7 @@ export class ListFriendsComponent implements OnInit {
 
   editFriend(name: string): void {
     this.friendsService
-      .updateFriend({ id: this.friendToEdit!.id, name })
+      .updateFriend({ id: this.friendToEdit.id, name })
       .subscribe(() => {
         this.toggleEditDialog({});
         this.showFriends();
@@ -78,7 +78,7 @@ export class ListFriendsComponent implements OnInit {
   }
 
   deleteFriend(): void {
-    this.friendsService.deleteFriend(this.friendToDelete!).subscribe(() => {
+    this.friendsService.deleteFriend(this.friendToDelete).subscribe(() => {
       this.toggleDeleteDialog({});
       this.showFriends();
     });

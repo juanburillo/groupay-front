@@ -31,7 +31,7 @@
   }
 </div>
 
-@if (friendData!.length > 0) {
+@if (friendData.length > 0) {
 <ul role="list" class="divide-y divide-gray-100 mx-10 mt-8">
   @for (friend of friendData; track friend.id) {
   <li class="flex flex-col gap-x-6 py-5">
@@ -86,7 +86,7 @@
 }
 
 @if (this.showEditDialog) {
-  <app-edit-dialog [initialName]="friendToEdit!.name!" (cancelEdit)="toggleEditDialog({})" (acceptEdit)="editFriend($event)"></app-edit-dialog>
+  <app-edit-dialog [initialName]="friendToEdit.name!" (cancelEdit)="toggleEditDialog({})" (acceptEdit)="editFriend($event)"></app-edit-dialog>
 }
 
 @if (this.showDeleteDialog) {

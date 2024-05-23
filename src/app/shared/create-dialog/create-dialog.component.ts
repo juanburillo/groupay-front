@@ -13,7 +13,7 @@ export class CreateDialogComponent implements OnInit {
   @Output() cancelCreate: EventEmitter<any> = new EventEmitter();
   @Output() acceptCreate: EventEmitter<any> = new EventEmitter();
 
-  friendData?: Friend[];
+  friendData: Friend[] = [];
 
   amount?: number;
   description?: string;

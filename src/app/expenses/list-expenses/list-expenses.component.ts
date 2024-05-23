@@ -12,12 +12,12 @@ import { Expense } from '../expense';
   templateUrl: './list-expenses.component.html',
 })
 export class ListExpensesComponent implements OnInit {
-  expenseData?: Expense[];
+  expenseData: Expense[] = [];
 
   showCreateDialog: boolean = false;
   showDeleteDialog: boolean = false;
 
-  expenseToDelete?: Expense;
+  expenseToDelete: Expense = {};
 
   constructor(
     private expenseService: ExpensesService,
@@ -51,7 +51,7 @@ export class ListExpensesComponent implements OnInit {
   }
 
   deleteExpense(): void {
-    this.expenseService.deleteExpense(this.expenseToDelete!).subscribe(() => {
+    this.expenseService.deleteExpense(this.expenseToDelete).subscribe(() => {
       this.toggleDeleteDialog({});
       this.showExpenses();
     });

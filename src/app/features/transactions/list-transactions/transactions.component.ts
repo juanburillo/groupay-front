@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TransactionsService } from '../../core/services/transactions/transactions.service';
+import { TransactionsService } from '../../../core/services/transactions/transactions.service';
 
 @Component({
   selector: 'app-transactions',

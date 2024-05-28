@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ListFriendsComponent } from './friends/list-friends/list-friends.component';
-import { ListExpensesComponent } from './expenses/list-expenses/list-expenses.component';
-import { ListTransactionsComponent } from './transactions/list-transactions/transactions.component';
+import { HomeComponent } from './features/home/home.component';
+import { ListFriendsComponent } from './features/friends/list-friends/list-friends.component';
+import { ListExpensesComponent } from './features/expenses/list-expenses/list-expenses.component';
+import { ListTransactionsComponent } from './features/transactions/list-transactions/transactions.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},

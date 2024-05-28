@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpensesService } from '../../core/services/expenses/expenses.service';
-import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
-import { CreateDialogComponent } from '../../shared/create-dialog/create-dialog.component';
+import { ExpensesService } from '../../../core/services/expenses/expenses.service';
+import { DeleteDialogComponent } from '../../../shared/delete-dialog/delete-dialog.component';
+import { CreateDialogComponent } from '../../../shared/create-dialog/create-dialog.component';
 import { Router } from '@angular/router';
 import { Expense } from '../expense';
 

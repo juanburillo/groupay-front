@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendsService } from '../../core/services/friends/friends.service';
+import { FriendsService } from '../../../core/services/friends/friends.service';
 import { FormsModule } from '@angular/forms';
-import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
-import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
-import { BalancesService } from '../../core/services/balances/balances.service';
+import { EditDialogComponent } from '../../../shared/edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from '../../../shared/delete-dialog/delete-dialog.component';
+import { BalancesService } from '../../../core/services/balances/balances.service';
 import { Friend } from '../friend';
 import { Balance } from '../balance';
 

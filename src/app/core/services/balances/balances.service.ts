@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Balance } from '../../../friends/balance';
+import { Balance } from '../../../features/friends/balance';
 
 @Injectable({
   providedIn: 'root',

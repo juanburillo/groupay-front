@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FriendsService } from '../../core/services/friends/friends.service';
 import { FormsModule } from '@angular/forms';
-import { Friend } from '../../friends/friend';
+import { Friend } from '../../features/friends/friend';
 
 @Component({
   selector: 'app-create-dialog',
